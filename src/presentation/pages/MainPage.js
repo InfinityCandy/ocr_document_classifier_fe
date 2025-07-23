@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Typography, Grid, Card, CardContent, CardMedia, CircularProgress, Alert } from '@mui/material';
+import { Container, Typography, Grid, Card, CardContent, CardMedia, CircularProgress, Alert, Button, Box } from '@mui/material';
 import getDocuments from '../../usecases/getDocuments';
 import getCategories from '../../usecases/getCategories';
 import DocumentRepository from '../../infrastructure/DocumentRepository';
@@ -50,6 +50,11 @@ const MainPage = () => {
 
   return (
     <Container sx={{ mt: 4 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 3 }}>
+        <Button variant="contained" color="primary" onClick={() => navigate('/add-document')}>
+          Add Document
+        </Button>
+      </Box>
       <Typography variant="h4" gutterBottom>Documents</Typography>
       <Grid container spacing={3}>
         {documents.map(doc => (
