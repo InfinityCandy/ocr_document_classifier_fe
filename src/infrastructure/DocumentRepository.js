@@ -50,9 +50,10 @@ const DocumentRepository = {
     if (!response.ok) throw new Error('Failed to delete document');
     return true;
   },
-  uploadDocument: async (file) => {
+  uploadDocument: async (file, name) => {
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('name', name);
     const response = await fetch(API_URL, {
       method: 'POST',
       body: formData,

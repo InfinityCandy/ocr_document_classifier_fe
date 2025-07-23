@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Typography, Button, CircularProgress, Alert, Box } from '@mui/material';
+import { Container, Typography, Button, CircularProgress, Alert, Box, TextField } from '@mui/material';
 import DocumentRepository from '../../infrastructure/DocumentRepository';
 
 const AddDocumentPage = () => {
@@ -8,6 +8,7 @@ const AddDocumentPage = () => {
   const [previewUrl, setPreviewUrl] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [name, setName] = useState('');
   const navigate = useNavigate();
 
   const handleFileChange = (e) => {
@@ -26,10 +27,14 @@ const AddDocumentPage = () => {
       setError('Please select a file to upload.');
       return;
     }
+    if (!name.trim()) {
+      setError('Please enter a document name.');
+      return;
+    }
     setLoading(true);
     setError(null);
     try {
-      await DocumentRepository.uploadDocument(file);
+      await DocumentRepository.uploadDocument(file, name);
       navigate('/');
     } catch (err) {
       setError('Failed to upload document: ' + err.message);
@@ -44,6 +49,14 @@ const AddDocumentPage = () => {
         <Typography variant="h5" gutterBottom>Add Document</Typography>
         <form onSubmit={handleSubmit}>
           <Box mb={2}>
+            <TextField
+              label="Document Name"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              fullWidth
+              required
+              sx={{ mb: 2 }}
+            />
             <input type="file" accept="image/*,.pdf,.doc,.docx,.txt" onChange={handleFileChange} />
           </Box>
           {previewUrl && (
