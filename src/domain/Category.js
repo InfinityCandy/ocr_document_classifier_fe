@@ -1,9 +1,8 @@
-// Document entity
 class Category {
-    constructor({ value, label}) {
-      this.value = value;
-      this.label = label;
-    }
+  constructor({ value, label }) {
+    this.value = value;
+    this.label = label;
   }
-  
-export default Category; 
+}
+
+export default Category;

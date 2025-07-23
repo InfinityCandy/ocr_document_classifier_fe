@@ -1,4 +1,3 @@
-// Document entity
 class Document {
   constructor({ id, name, category, text, entities, imageUrl }) {
     this.id = id;
@@ -6,8 +5,8 @@ class Document {
     this.category = category;
     this.text = text;
     this.entities = entities;
-    //this.imageUrl = imageUrl;
+    this.imageUrl = imageUrl;
   }
 }
 
-export default Document; 
+export default Document;
